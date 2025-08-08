@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dummy Agent Interface</title>
+</head>
+<body>
+    <h1>Dummy Agent Interface</h1>
+    <div>
+        <label for="text-blocks">Text Blocks:</label><br>
+        <textarea id="text-blocks" rows="6" cols="60"></textarea>
+    </div>
+    <div>
+        <label for="system-prompt">System Prompt:</label><br>
+        <textarea id="system-prompt" rows="4" cols="60"></textarea>
+    </div>
+    <div>
+        <label for="user-prompt">User Prompt:</label><br>
+        <textarea id="user-prompt" rows="4" cols="60"></textarea>
+    </div>
+    <button id="generate-btn">Generate</button>
+    <h2>Output:</h2>
+    <textarea id="output" rows="6" cols="60" readonly></textarea>
+
+    <script>
+        document.getElementById('generate-btn').addEventListener('click', async () => {
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    text_blocks: document.getElementById('text-blocks').value,
+                    system_prompt: document.getElementById('system-prompt').value,
+                    user_prompt: document.getElementById('user-prompt').value,
+                })
+            });
+            const data = await response.json();
+            document.getElementById('output').value = data.output;
+        });
+    </script>
+</body>
+</html>
