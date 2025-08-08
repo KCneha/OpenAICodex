@@ -11,7 +11,7 @@ This repository contains a minimal Flask application that serves a static webpag
 ## Running the app
 1. Install dependencies:
    ```bash
-   pip install flask
+   uv pip install -r requirements.txt
    ```
 2. Start the development server:
    ```bash
